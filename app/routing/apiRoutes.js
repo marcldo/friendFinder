@@ -7,7 +7,7 @@ const path = require('path');
 
 
 //import friend data
-const friends = require('../data/friends.js');
+const friends = require(path.join(__dirname, '../data/friends.js'));
 
 
 module.exports = function (app) {
@@ -18,11 +18,18 @@ module.exports = function (app) {
     app.post('/api/friends', (req, res) => {
         let newFriend = req.body;
 
-        console.log(newFriend);
+        friends.forEach(matchFriend);
 
-        friends.push(newFriend);
+        function matchFriend(friend, index) {
+            // console.log(item.scores);
+            // console.log(newFriend.scores);
+            let difference = null;
 
-        console.log(friends);
+            newFriend.scores.forEach((newFriendScore, index) => {
+                difference += Math.abs(parseInt(newFriendScore) - friend.scores[index]);
+            });
+            console.log(difference);
+        }
 
     });
 }
