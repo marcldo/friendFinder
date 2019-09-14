@@ -16,20 +16,36 @@ module.exports = function (app) {
     });
 
     app.post('/api/friends', (req, res) => {
+
         let newFriend = req.body;
+        let match = null;
+        let differences = [];
 
         friends.forEach(matchFriend);
 
         function matchFriend(friend, index) {
-            // console.log(item.scores);
-            // console.log(newFriend.scores);
-            let difference = null;
 
+            let scoreDifference = null;
+
+            // compare user data with friends data
             newFriend.scores.forEach((newFriendScore, index) => {
-                difference += Math.abs(parseInt(newFriendScore) - friend.scores[index]);
+                scoreDifference += Math.abs(parseInt(newFriendScore) - friend.scores[index]);
             });
-            console.log(difference);
+
+            // array of all the differences
+            differences.push(scoreDifference);
+
         }
+        // find the index of the smallest difference
+        let i = differences.indexOf(Math.min(...differences));
+
+
+        match = friends[i];
+
+        console.log("match is " + match);
+
+        res.send(match);
+
 
     });
 }
