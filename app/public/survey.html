@@ -111,32 +111,41 @@
     $("#submit").on("click", function () {
         event.preventDefault();
 
-        let newFriend = {
-            name: $("#name").val().trim(),
-            scores: [
-                $("#q1").val(),
-                $("#q2").val(),
-                $("#q3").val()
-            ]
-        };
+        var f = document.getElementsByTagName('form')[0];
+        if (f.checkValidity()) {
+            checkMatch();
+        } else {
+            alert("Please Answer All The Questions");
+        }
 
-        let modal = document.getElementById("modal-body");
-        let img = document.createElement("img");
-        let message = document.createElement("p");
+        function checkMatch() {
+            let newFriend = {
+                name: $("#name").val().trim(),
+                scores: [
+                    $("#q1").val(),
+                    $("#q2").val(),
+                    $("#q3").val()
+                ]
+            };
 
-        // post request
-        $.post("api/friends", newFriend).then(function (data) {
-            console.log(data);
+            let modal = document.getElementById("modal-body");
+            let img = document.createElement("img");
+            let message = document.createElement("p");
 
-            img.setAttribute("src", data.photo);
-            message.textContent = `It's a Match ${data.name}`
+            // post request
+            $.post("api/friends", newFriend).then(function (data) {
+                console.log(data);
 
-            modal.appendChild(img);
-            modal.appendChild(message);
+                img.setAttribute("src", data.photo);
+                message.textContent = `It's a Match ${data.name}`
 
-            $("#matchModal").modal("show");
+                modal.appendChild(img);
+                modal.appendChild(message);
 
-        });
+                $("#matchModal").modal("show");
+
+            });
+        }
 
         $(".close").click(function () {
             location.reload();
