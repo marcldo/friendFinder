@@ -1,0 +1,52 @@
+body{
+background-color: #EEEEEE;
+font-family: 'Quicksand', sans-serif;
+}
+
+.background{
+    width: 40%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+    background-position: center top; 
+    background-size: cover;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url(../img/cat.jpeg);
+    margin: 0 auto;
+}
+.main-title{
+    font-family: 'Gochi Hand', cursive;
+    font-size: 80px;
+    margin-block-start: 0.3em;
+    margin-block-end: 0.1em;
+    text-align: center;
+}
+
+form{
+    width: 80%;
+    margin: 0 auto;
+}
+
+img{
+    width: 100%;
+}
+
+@media only screen and (max-width: 1000px){
+    .background{
+        width: 65%;
+    }
+   
+
+}
+
+
+@media only screen and (max-width: 768px){
+    .background{
+        width: 100%;
+    }
+
+}

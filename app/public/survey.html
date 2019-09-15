@@ -11,7 +11,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
 
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="/styles/survey-style.css" type="text/css">
 
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Gochi+Hand|Quicksand&display=swap" rel="stylesheet">
 
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.4.1.js"
@@ -27,58 +31,79 @@
 
 <body>
 
-    <form>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">Name</span>
+    <div class="background">
+        <div class="container titles">
+            <div class="main-title">
+                <h1>Pet Finder</h1>
             </div>
-            <input id="name" type="text" class="form-control" placeholder="Name" aria-label="Name"
-                aria-describedby="basic-addon1" required />
-        </div>
-
-        <div>question 1</div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <label class="input-group-text" for="inputGroupSelect01">Options</label>
-            </div>
-            <select class="custom-select" id="q1" required>
-                <option value="">Choose...</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
-        </div>
-
-        <div>question 2</div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <label class="input-group-text" for="inputGroupSelect01">Options</label>
-            </div>
-            <select class="custom-select" id="q2" required>
-                <option value="">Choose...</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
         </div>
 
 
-        <div>question 3</div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <label class="input-group-text" for="inputGroupSelect01">Options</label>
+        <form>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Name</span>
+                </div>
+                <input id="name" type="text" class="form-control" placeholder="Name" aria-label="Name"
+                    aria-describedby="basic-addon1" required />
             </div>
-            <select class="custom-select" id="q3" required>
-                <option value="">Choose...</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
-        </div>
 
-        <button type="submit" class="btn btn-primary" id="submit">Submit</button>
-    </form>
+            <div>How would your friends describe you?</div>
+            <div class="input-group mb-3">
+                <select class="custom-select" id="q1" required>
+                    <option value="">Choose...</option>
+                    <option value="1">Independant</option>
+                    <option value="2">Social</option>
+                    <option value="3">Shy</option>
+                </select>
+            </div>
 
+            <div>What size garden do you have?</div>
+            <div class="input-group mb-3">
+                <select class="custom-select" id="q2" required>
+                    <option value="">Choose...</option>
+                    <option value="1">I don't have a secure garden</option>
+                    <option value="2">I have a small or medium size, secure garden</option>
+                    <option value="3">I have a big, secure garden</option>
+                </select>
+            </div>
+
+
+            <div>How active are you?</div>
+            <div class="input-group mb-3">
+                <select class="custom-select" id="q3" required>
+                    <option value="">Choose...</option>
+                    <option value="1">I'm not very active and don't really spend much time outdoors</option>
+                    <option value="2">I spend lots of time outdoors but I prefer shorter walks</option>
+                    <option value="3">I love long walks all year round and I'm not put off by bad weather</option>
+                </select>
+            </div>
+
+            <div>How much time do you have to spend with your pet?</div>
+            <div class="input-group mb-3">
+                <select class="custom-select" id="q4" required>
+                    <option value="">Choose...</option>
+                    <option value="1">I'm busy and I'm out of the house for more than 4 hours most days</option>
+                    <option value="2">I'm out of the house most of the day but I have free time once I'm home</option>
+                    <option value="3">I have lots of free time to devote to my new pet</option>
+                </select>
+            </div>
+
+            <div>How much money could you spend on your new pet?</div>
+            <div class="input-group mb-3">
+                <select class="custom-select" id="q5" required>
+                    <option value="">Choose...</option>
+                    <option value="1">I can afford $30-$120 every month - $1,000 plus a year</option>
+                    <option value="2">I can afford $120-$150 every month - $1,500 plus a year</option>
+                    <option value="3">I can afford $150 or more every month - $2,000 plus a year</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+
+        </form>
+
+    </div>
 
     <!-- Modal -->
     <div class="modal fade" id="matchModal" tabindex="-1" role="dialog" aria-labelledby="matchModalLabel"
@@ -92,7 +117,9 @@
                     </button>
                 </div>
                 <div class="modal-body" id="modal-body">
-                    ...
+                    <div id="img-container">
+
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary close" data-dismiss="modal">Close</button>
@@ -111,6 +138,7 @@
     $("#submit").on("click", function () {
         event.preventDefault();
 
+        //validation
         var f = document.getElementsByTagName('form')[0];
         if (f.checkValidity()) {
             checkMatch();
@@ -124,23 +152,26 @@
                 scores: [
                     $("#q1").val(),
                     $("#q2").val(),
-                    $("#q3").val()
+                    $("#q3").val(),
+                    $("#q4").val(),
+                    $("#q5").val()
                 ]
             };
 
             let modal = document.getElementById("modal-body");
+            let imgContainer = document.getElementById("img-container");
             let img = document.createElement("img");
-            let message = document.createElement("p");
+            let message = document.getElementById("matchModalLabel");
 
             // post request
             $.post("api/friends", newFriend).then(function (data) {
                 console.log(data);
 
                 img.setAttribute("src", data.photo);
-                message.textContent = `It's a Match ${data.name}`
+                message.textContent = `You Should get a ${data.name}!`
 
-                modal.appendChild(img);
-                modal.appendChild(message);
+                imgContainer.appendChild(img);
+
 
                 $("#matchModal").modal("show");
 
