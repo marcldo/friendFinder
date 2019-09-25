@@ -6,7 +6,6 @@ A full-stack site that takes in results from user survey, then matches them with
 ## Technologies Used
 * Node.js
 * Express
-* MySql
 * Bootstrap
 * Fully Responsive Design
 
